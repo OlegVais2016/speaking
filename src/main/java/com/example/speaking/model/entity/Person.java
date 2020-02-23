@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Person {
 
     @Id
-    private String userId;
+    private String personId;
     private String email;
     private String password;
     private String firstName;
