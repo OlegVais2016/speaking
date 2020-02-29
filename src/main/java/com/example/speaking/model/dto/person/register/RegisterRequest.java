@@ -1,4 +1,4 @@
-package com.example.speaking.model.dto.reg;
+package com.example.speaking.model.dto.person.register;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
-public class RegPersonRequest {
+public class RegisterRequest {
 
     private String email;
     private String password;
@@ -15,5 +15,4 @@ public class RegPersonRequest {
     private String lastName;
     private String number;
     private Integer age;
-
 }

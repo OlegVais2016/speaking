@@ -1,7 +1,10 @@
 package com.example.speaking.controller;
 
-import com.example.speaking.model.dto.reg.RegPersonRequest;
-import com.example.speaking.model.dto.reg.RegPersonResponse;
+
+import com.example.speaking.model.dto.person.login.LoginRequest;
+import com.example.speaking.model.dto.person.login.LoginResponse;
+import com.example.speaking.model.dto.person.register.RegisterRequest;
+import com.example.speaking.model.dto.person.register.RegisterResponse;
 import com.example.speaking.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +20,13 @@ public class PersonController {
     private PersonService personService;
 
     @PostMapping("/persons/create")
-    public RegPersonResponse register(@RequestBody RegPersonRequest regPersonRequest){
-        return personService.savePerson(regPersonRequest);
+    public RegisterResponse register(@RequestBody RegisterRequest registerRequest){
+        return personService.savePerson(registerRequest);
     }
 
+    @PostMapping("/persons/login")
+    public LoginResponse login (@RequestBody LoginRequest loginRequest){
+        return personService.login(loginRequest);
+    }
 }
+

@@ -1,4 +1,4 @@
-package com.example.speaking.model.dto.reg;
+package com.example.speaking.model.dto.person.register;
 
 import lombok.*;
 
@@ -7,8 +7,7 @@ import lombok.*;
 @Setter
 @Getter
 @Builder
-public class RegPersonResponse {
-
+public class RegisterResponse {
     private String personId;
     private String email;
     private String firstName;

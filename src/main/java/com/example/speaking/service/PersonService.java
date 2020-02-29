@@ -1,9 +1,12 @@
 package com.example.speaking.service;
 
-import com.example.speaking.model.dto.reg.RegPersonRequest;
-import com.example.speaking.model.dto.reg.RegPersonResponse;
+import com.example.speaking.model.dto.person.login.LoginRequest;
+import com.example.speaking.model.dto.person.login.LoginResponse;
+import com.example.speaking.model.dto.person.register.RegisterRequest;
+import com.example.speaking.model.dto.person.register.RegisterResponse;
 
 public interface PersonService {
 
-    RegPersonResponse savePerson(RegPersonRequest regPersonRequest);
+    RegisterResponse savePerson(RegisterRequest registerRequest);
+    LoginResponse login(LoginRequest loginRequest);
 }
