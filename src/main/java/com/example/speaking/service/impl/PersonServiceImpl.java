@@ -20,11 +20,14 @@ import java.util.UUID;
 @Service
 public class PersonServiceImpl implements PersonService {
 
-    @Autowired
-    private PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
-    @Autowired
-    private PersonSessionRepository personSessionRepository;
+    private final PersonSessionRepository personSessionRepository;
+
+    public PersonServiceImpl(PersonRepository personRepository, PersonSessionRepository personSessionRepository) {
+        this.personRepository = personRepository;
+        this.personSessionRepository = personSessionRepository;
+    }
 
     @Override
     public RegisterResponse savePerson(RegisterRequest registerRequest) {
@@ -70,6 +73,17 @@ public class PersonServiceImpl implements PersonService {
                 .token(personSession.getSessionId())
                 .build();
     }
-}
 
+    @Override
+    public void logout(String token) {
+        PersonSession personSession = personSessionRepository
+                .findBySessionIdAndIsValidTrue(token);
+        if(personSession == null){
+            throw new AuthenticationException("Email or password is incorrect");
+        }
+        personSession.setIsValid(false);
+        personSessionRepository.save(personSession);
+        log.debug("Session ID = {} invalidated", token);
+    }
+}
 

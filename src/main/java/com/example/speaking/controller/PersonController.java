@@ -7,10 +7,7 @@ import com.example.speaking.model.dto.person.register.RegisterRequest;
 import com.example.speaking.model.dto.person.register.RegisterResponse;
 import com.example.speaking.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -27,6 +24,11 @@ public class PersonController {
     @PostMapping("/persons/login")
     public LoginResponse login (@RequestBody LoginRequest loginRequest){
         return personService.login(loginRequest);
+    }
+
+    @PutMapping("/persons/logout")
+    public void logout(@RequestHeader(value = "Authorization") String token) {
+        personService.logout(token);
     }
 }
 

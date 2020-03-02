@@ -9,4 +9,5 @@ public interface PersonService {
 
     RegisterResponse savePerson(RegisterRequest registerRequest);
     LoginResponse login(LoginRequest loginRequest);
+    void logout(String token);
 }
