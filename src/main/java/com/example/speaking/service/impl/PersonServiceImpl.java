@@ -5,6 +5,8 @@ import com.example.speaking.model.dto.person.login.LoginRequest;
 import com.example.speaking.model.dto.person.login.LoginResponse;
 import com.example.speaking.model.dto.person.register.RegisterRequest;
 import com.example.speaking.model.dto.person.register.RegisterResponse;
+import com.example.speaking.model.dto.person.update.UpdateRequest;
+import com.example.speaking.model.dto.person.update.UpdateResponse;
 import com.example.speaking.model.entity.Person;
 import com.example.speaking.model.entity.PersonSession;
 import com.example.speaking.repository.PersonRepository;
@@ -23,6 +25,7 @@ public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
 
     private final PersonSessionRepository personSessionRepository;
+
 
     public PersonServiceImpl(PersonRepository personRepository, PersonSessionRepository personSessionRepository) {
         this.personRepository = personRepository;
@@ -84,6 +87,24 @@ public class PersonServiceImpl implements PersonService {
         personSession.setIsValid(false);
         personSessionRepository.save(personSession);
         log.debug("Session ID = {} invalidated", token);
+    }
+
+    @Override
+    public UpdateResponse updateAccount(UpdateRequest updateRequest, Person person) {
+
+        person.setFirstName(updateRequest.getFirstName());
+        person.setLastName(updateRequest.getLastName());
+        person.setNumber(updateRequest.getNumber());
+        person.setAge(updateRequest.getAge());
+        personRepository.save(person);
+
+        return UpdateResponse.builder()
+                .personId(person.getPersonId())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .number(person.getNumber())
+                .age(person.getAge())
+                .build();
     }
 }
 
