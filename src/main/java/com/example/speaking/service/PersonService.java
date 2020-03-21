@@ -8,10 +8,13 @@ import com.example.speaking.model.dto.person.update.UpdateRequest;
 import com.example.speaking.model.dto.person.update.UpdateResponse;
 import com.example.speaking.model.entity.Person;
 
+import java.util.List;
+
 public interface PersonService {
 
     RegisterResponse savePerson(RegisterRequest registerRequest);
     LoginResponse login(LoginRequest loginRequest);
     void logout(String token);
     UpdateResponse updateAccount(UpdateRequest updateRequest, Person person);
+    List<UpdateResponse> getPersonsList();
 }

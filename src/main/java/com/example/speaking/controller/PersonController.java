@@ -12,6 +12,8 @@ import com.example.speaking.service.PersonService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class PersonController {
@@ -42,6 +44,12 @@ public class PersonController {
                                         @AuthenticationPrincipal Person person){
         return personService.updateAccount(updateRequest,person);
     }
+
+    @GetMapping("/persons/persons")
+    public List<UpdateResponse> getPersonsList(@AuthenticationPrincipal Person person){
+        return personService.getPersonsList();
+    }
+
 
 }
 
