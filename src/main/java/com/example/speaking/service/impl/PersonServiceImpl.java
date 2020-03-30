@@ -45,6 +45,7 @@ public class PersonServiceImpl implements PersonService {
                 .age(registerRequest.getAge())
                 .build();
         personRepository.save(person);
+        log.info("New person created");
         return RegisterResponse.builder()
                 .personId(person.getPersonId())
                 .email(person.getEmail())
