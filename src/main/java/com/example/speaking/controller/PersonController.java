@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/persons")
 public class PersonController {
 
     private final PersonService personService;
@@ -24,28 +24,28 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @PostMapping("/persons/create")
+    @PostMapping("/create")
     public RegisterResponse register(@RequestBody RegisterRequest registerRequest){
         return personService.savePerson(registerRequest);
     }
 
-    @PostMapping("/persons/login")
+    @PostMapping("/login")
     public LoginResponse login (@RequestBody LoginRequest loginRequest){
         return personService.login(loginRequest);
     }
 
-    @PutMapping("/persons/logout")
+    @PutMapping("/logout")
     public void logout(@RequestHeader(value = "Authorization") String token) {
         personService.logout(token);
     }
 
-    @PostMapping("/persons/update")
+    @PostMapping("/update")
     public UpdateResponse updateAccount(@RequestBody UpdateRequest updateRequest,
                                         @AuthenticationPrincipal Person person){
         return personService.updateAccount(updateRequest,person);
     }
 
-    @GetMapping("/persons/persons")
+    @GetMapping("/persons")
     public List<UpdateResponse> getPersonsList(@AuthenticationPrincipal Person person){
         return personService.getPersonsList();
     }
