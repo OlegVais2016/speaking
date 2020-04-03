@@ -11,16 +11,16 @@ export class PersonHttpService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private personsUrl = 'api/persons';  // URL to web api
-
+  private personsUrlList = 'api/persons/persons';
+  private personsUrlSave = 'api/persons/create';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   getPersonObservable(): Observable<Person[]>{
-    return this.httpClient.get<Person[]>(this.personsUrl)
+    return this.httpClient.get<Person[]>(this.personsUrlList)
   }
   addPerson(person:Person):Observable<Person>{
-    return this.httpClient.post<Person>(this.personsUrl, person, this.httpOptions)
+    return this.httpClient.post<Person>(this.personsUrlSave, person, this.httpOptions)
   }
 }
 

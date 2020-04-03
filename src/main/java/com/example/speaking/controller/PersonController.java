@@ -46,7 +46,7 @@ public class PersonController {
     }
 
     @GetMapping("/persons")
-    public List<UpdateResponse> getPersonsList(@AuthenticationPrincipal Person person){
+    public List<UpdateResponse> getPersonsList(){
         return personService.getPersonsList();
     }
 

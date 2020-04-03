@@ -113,7 +113,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<UpdateResponse> getPersonsList() {
         return personRepository.findAll().stream()
-                .map(person -> transform(person))
+                .map(this::transform)
                 .collect(Collectors.toList());
 
     }
