@@ -22,5 +22,15 @@ export class PersonHttpService {
   addPerson(person:Person):Observable<Person>{
     return this.httpClient.post<Person>(this.personsUrlSave, person, this.httpOptions)
   }
-}
 
+  /*deletePerson(person:Person | string): Observable<Person>{
+    const id = typeof person === 'string' ? person : person.personId;
+    const url =
+  }*/
+}
+/*deleteMember (member: Member | number): Observable<Member> {
+  const id = typeof member === 'number' ? member : member.id;
+const url = `${this.membersUrl}/${id}`;
+
+return this.httpClient.delete<Member>(url, this.httpOptions);
+}*/

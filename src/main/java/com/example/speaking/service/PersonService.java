@@ -17,4 +17,5 @@ public interface PersonService {
     void logout(String token);
     UpdateResponse updateAccount(UpdateRequest updateRequest, Person person);
     List<UpdateResponse> getPersonsList();
+    void deleteById(String personId);
 }

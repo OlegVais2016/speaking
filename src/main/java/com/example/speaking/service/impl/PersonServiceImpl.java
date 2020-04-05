@@ -118,6 +118,11 @@ public class PersonServiceImpl implements PersonService {
 
     }
 
+    @Override
+    public void deleteById(String personId) {
+        personRepository.deleteById(personId);
+    }
+
     private UpdateResponse transform(Person person){
         return UpdateResponse.builder()
                 .personId(person.getPersonId())
