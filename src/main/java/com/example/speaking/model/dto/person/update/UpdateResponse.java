@@ -10,6 +10,7 @@ import lombok.*;
 public class UpdateResponse {
 
     private String personId;
+    private String email;
     private String firstName;
     private String lastName;
     private String number;

@@ -13,6 +13,7 @@ export class PersonHttpService {
 
   private personsUrlList = 'api/persons/persons';
   private personsUrlSave = 'api/persons/create';
+  private personsUrlDelete = 'api/persons/delete';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -23,14 +24,10 @@ export class PersonHttpService {
     return this.httpClient.post<Person>(this.personsUrlSave, person, this.httpOptions)
   }
 
-  /*deletePerson(person:Person | string): Observable<Person>{
-    const id = typeof person === 'string' ? person : person.personId;
-    const url =
-  }*/
+  deletePerson(person:Person | string): Observable<Person>{
+    const personId = typeof person === 'string' ? person : person.personId;
+    const url = `${this.personsUrlDelete}/${personId}`;
+    return this.httpClient.delete<Person>(url,this.httpOptions)
+  }
 }
-/*deleteMember (member: Member | number): Observable<Member> {
-  const id = typeof member === 'number' ? member : member.id;
-const url = `${this.membersUrl}/${id}`;
 
-return this.httpClient.delete<Member>(url, this.httpOptions);
-}*/

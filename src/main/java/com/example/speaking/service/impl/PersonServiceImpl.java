@@ -103,6 +103,7 @@ public class PersonServiceImpl implements PersonService {
 
         return UpdateResponse.builder()
                 .personId(person.getPersonId())
+                .email(person.getEmail())
                 .firstName(person.getFirstName())
                 .lastName(person.getLastName())
                 .number(person.getNumber())
@@ -126,6 +127,7 @@ public class PersonServiceImpl implements PersonService {
     private UpdateResponse transform(Person person){
         return UpdateResponse.builder()
                 .personId(person.getPersonId())
+                .email(person.getEmail())
                 .firstName(person.getFirstName())
                 .lastName(person.getLastName())
                 .age(person.getAge())

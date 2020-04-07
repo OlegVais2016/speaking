@@ -16,17 +16,14 @@ export class PersonsComponent implements OnInit {
       .getPersonObservable()
       .subscribe(data => this.persons = data);
   }
-  /*delete(person:Person): void{
+  delete(person:Person): void{
     this.persons = this.persons.filter(h => h != person);
-  }*/
+    this.personHttpService.deletePerson(person).subscribe();
+  }
 
   ngOnInit() {
     this.getPersons();
   }
 
 }
-/*
-delete(member: Member): void {
-  this.members = this.members.filter(h => h !== member);
-this.memberHttpService.deleteMember(member).subscribe();
-}*/
+
