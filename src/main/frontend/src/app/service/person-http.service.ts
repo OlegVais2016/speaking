@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import Person from "../model/person";
-import person from "../model/person";
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,15 @@ export class PersonHttpService {
   private personsUrlList = 'api/persons/persons';
   private personsUrlSave = 'api/persons/create';
   private personsUrlDelete = 'api/persons/delete';
+  private personsUrlLogin = 'api/persons/login';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  login(email: string, password: string){
+    return this.httpClient.post<Person>(this.personsUrlLogin,
+      {email:email,password:password}, {observe:"response"});
+  }
+
   getPersonObservable(): Observable<Person[]>{
     return this.httpClient.get<Person[]>(this.personsUrlList)
   }
@@ -30,4 +36,5 @@ export class PersonHttpService {
     return this.httpClient.delete<Person>(url,this.httpOptions)
   }
 }
+
 
