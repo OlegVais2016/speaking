@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import Person from "../model/person";
 
@@ -8,7 +8,21 @@ import Person from "../model/person";
   providedIn: 'root'
 })
 export class PersonHttpService {
+  intercept(req: HttpRequest<any>, next: HttpHandler)
+    : Observable<HttpEvent<any>> {
 
+    let token = localStorage.getItem("Authorization");
+
+    if (token) {
+      let requestClone = req.clone({
+        headers: new HttpHeaders({
+          "Authorization" : token
+        })
+      });
+      return next.handle(requestClone);
+    }
+    return next.handle(req);
+  }
   constructor(private httpClient: HttpClient) { }
 
   private personsUrlList = 'api/persons/persons';
@@ -16,7 +30,8 @@ export class PersonHttpService {
   private personsUrlDelete = 'api/persons/delete';
   private personsUrlLogin = 'api/persons/login';
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders(
+      { 'Content-Type': 'application/json' })
   };
   login(email: string, password: string){
     return this.httpClient.post<Person>(this.personsUrlLogin,
@@ -26,6 +41,7 @@ export class PersonHttpService {
   getPersonObservable(): Observable<Person[]>{
     return this.httpClient.get<Person[]>(this.personsUrlList)
   }
+
   addPerson(person:Person):Observable<Person>{
     return this.httpClient.post<Person>(this.personsUrlSave, person, this.httpOptions)
   }
