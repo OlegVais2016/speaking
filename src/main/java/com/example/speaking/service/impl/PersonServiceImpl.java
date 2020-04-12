@@ -75,7 +75,7 @@ public class PersonServiceImpl implements PersonService {
                         .isValid(true)
                 .build());
         log.debug("User with name = {} logged in", person.getFirstName());
-        response.setHeader("Authorization", personSession.getId());
+        response.setHeader("Authorization", personSession.getSessionId());
         return LoginResponse.builder()
                 .token(personSession.getSessionId())
                 .build();

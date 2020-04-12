@@ -37,7 +37,7 @@ public class PersonController {
         return personService.login(loginRequest,response);
     }
 
-    @PutMapping("/logout")
+    @PostMapping("/logout")
     public void logout(@RequestHeader(value = "Authorization") String token) {
         personService.logout(token);
     }
