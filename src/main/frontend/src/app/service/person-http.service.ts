@@ -7,13 +7,13 @@ import Person from "../model/person";
 @Injectable({
   providedIn: 'root'
 })
-export class PersonHttpService {
+export class PersonHttpService implements HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler)
     : Observable<HttpEvent<any>> {
-
+debugger;
     let token = localStorage.getItem("Authorization");
 
-    if (token) {
+    if (token != null) {
       let requestClone = req.clone({
         headers: new HttpHeaders({
           "Authorization" : token
@@ -29,13 +29,21 @@ export class PersonHttpService {
   private personsUrlSave = 'api/persons/create';
   private personsUrlDelete = 'api/persons/delete';
   private personsUrlLogin = 'api/persons/login';
-  httpOptions = {
+  private personUrlLogout = 'api/persons/logout';
+
+  /*httpOptions = {
     headers: new HttpHeaders(
-      { 'Content-Type': 'application/json' })
-  };
+      { 'Content-Type': 'application/json','Authorization':'token' })
+  };*/
+
+
   login(email: string, password: string){
     return this.httpClient.post<Person>(this.personsUrlLogin,
       {email:email,password:password}, {observe:"response"});
+  }
+
+  logout() {
+    return this.httpClient.post<void>(this.personUrlLogout, {});
   }
 
   getPersonObservable(): Observable<Person[]>{
@@ -43,13 +51,13 @@ export class PersonHttpService {
   }
 
   addPerson(person:Person):Observable<Person>{
-    return this.httpClient.post<Person>(this.personsUrlSave, person, this.httpOptions)
+    return this.httpClient.post<Person>(this.personsUrlSave, person)
   }
 
   deletePerson(person:Person | string): Observable<Person>{
     const personId = typeof person === 'string' ? person : person.personId;
     const url = `${this.personsUrlDelete}/${personId}`;
-    return this.httpClient.delete<Person>(url,this.httpOptions)
+    return this.httpClient.delete<Person>(url)
   }
 }
 

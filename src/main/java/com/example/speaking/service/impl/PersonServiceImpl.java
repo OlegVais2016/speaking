@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -58,7 +59,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public LoginResponse login(LoginRequest loginRequest) {
+    public LoginResponse login(LoginRequest loginRequest, HttpServletResponse response) {
 
         Person person = personRepository.findByEmailAndPassword
                 (loginRequest.getEmail(), loginRequest.getPassword());
@@ -74,7 +75,7 @@ public class PersonServiceImpl implements PersonService {
                         .isValid(true)
                 .build());
         log.debug("User with name = {} logged in", person.getFirstName());
-
+        response.setHeader("Authorization", personSession.getId());
         return LoginResponse.builder()
                 .token(personSession.getSessionId())
                 .build();
@@ -89,6 +90,7 @@ public class PersonServiceImpl implements PersonService {
         }
         personSession.setIsValid(false);
         personSessionRepository.save(personSession);
+
         log.debug("Session ID = {} invalidated", token);
     }
 

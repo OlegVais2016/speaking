@@ -8,10 +8,12 @@ import com.example.speaking.model.dto.person.register.RegisterResponse;
 import com.example.speaking.model.dto.person.update.UpdateRequest;
 import com.example.speaking.model.dto.person.update.UpdateResponse;
 import com.example.speaking.model.entity.Person;
+import com.example.speaking.model.entity.PersonSession;
 import com.example.speaking.service.PersonService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -30,8 +32,9 @@ public class PersonController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login (@RequestBody LoginRequest loginRequest){
-        return personService.login(loginRequest);
+    public LoginResponse login (@RequestBody LoginRequest loginRequest,
+                                HttpServletResponse response){
+        return personService.login(loginRequest,response);
     }
 
     @PutMapping("/logout")

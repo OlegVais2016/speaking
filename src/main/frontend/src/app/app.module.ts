@@ -8,9 +8,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ContentComponent } from './content/content.component';
 import { PersonsComponent } from './content/persons/persons.component';
 import { SeminarsComponent } from './content/seminars/seminars.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AddComponent } from './content/persons/add/add.component';
 import { LoginComponent } from './content/persons/login/login.component';
+import { LogoutComponent } from './content/persons/logout/logout.component';
+import {PersonHttpService} from "./service/person-http.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { LoginComponent } from './content/persons/login/login.component';
     PersonsComponent,
     SeminarsComponent,
     AddComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,13 @@ import { LoginComponent } from './content/persons/login/login.component';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: PersonHttpService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

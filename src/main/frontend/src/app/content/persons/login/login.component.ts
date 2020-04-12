@@ -19,8 +19,10 @@ export class LoginComponent implements OnInit {
     this.personHttpService
       .login(this.person.email, this.person.password)
       .subscribe(response => {
-        localStorage.setItem("Authorization", response.headers.get("Authorization"));
-        this.route.navigate(['/persons/all']);
+       /* localStorage.setItem("Authorization", response.headers.get("Authorization"));
+        this.route.navigate(['/persons/all']);*/
+       console.log(response.headers.get("Authorization"));
       })
+
   }
 }
