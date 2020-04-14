@@ -82,16 +82,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void logout(String token) {
+    public void logout(String sessionId) {
         PersonSession personSession = personSessionRepository
-                .findBySessionIdAndIsValidTrue(token);
+                .findBySessionIdAndIsValidTrue(sessionId);
         if(personSession == null){
             throw new AuthenticationException("Email or password is incorrect");
         }
         personSession.setIsValid(false);
         personSessionRepository.save(personSession);
 
-        log.debug("Session ID = {} invalidated", token);
+       log.debug("Session ID = {} invalidated", sessionId);
     }
 
     @Override

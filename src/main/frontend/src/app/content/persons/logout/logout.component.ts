@@ -6,14 +6,17 @@ import {Router} from "@angular/router";
   selector: 'app-logout',
   template: ''
 })
-export class LogoutComponent implements OnInit {
+export class LogoutComponent /*implements OnInit*/ {
 
-  constructor(private personHttpService: PersonHttpService, private route: Router) { }
+  constructor(private personHttpService: PersonHttpService/*, private route: Router*/) { }
 
-  ngOnInit(): void{
+  /*ngOnInit(): void{
     this.personHttpService.logout().subscribe(data => {
       this.route.navigate(['/persons/login']);
     });
-  }
+  }*/
+ /* ngOnInit(): void{
+    this.personHttpService.logout().subscribe();
 
+  }*/
 }
