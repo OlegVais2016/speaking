@@ -13,6 +13,7 @@ import { AddComponent } from './content/persons/add/add.component';
 import { LoginComponent } from './content/persons/login/login.component';
 import { LogoutComponent } from './content/persons/logout/logout.component';
 import {PersonHttpService} from "./service/person-http.service";
+import { PersonDetailComponent } from './content/persons/person-detail/person-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {PersonHttpService} from "./service/person-http.service";
     SeminarsComponent,
     AddComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    PersonDetailComponent
   ],
   imports: [
     BrowserModule,

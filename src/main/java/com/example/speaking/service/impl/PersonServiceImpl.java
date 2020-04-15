@@ -1,6 +1,7 @@
 package com.example.speaking.service.impl;
 
 import com.example.speaking.exception.AuthenticationException;
+import com.example.speaking.exception.PersonNotFoundException;
 import com.example.speaking.model.dto.person.login.LoginRequest;
 import com.example.speaking.model.dto.person.login.LoginResponse;
 import com.example.speaking.model.dto.person.register.RegisterRequest;
@@ -92,6 +93,21 @@ public class PersonServiceImpl implements PersonService {
         personSessionRepository.save(personSession);
 
        log.debug("Session ID = {} invalidated", sessionId);
+    }
+
+    @Override
+    public RegisterResponse findById(String personId) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(()-> new PersonNotFoundException(personId));
+
+        return RegisterResponse.builder()
+                .personId(person.getPersonId())
+                .email(person.getEmail())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .number(person.getNumber())
+                .age(person.getAge())
+                .build();
     }
 
     @Override

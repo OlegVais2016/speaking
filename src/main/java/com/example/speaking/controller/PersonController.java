@@ -37,12 +37,20 @@ public class PersonController {
         return personService.login(loginRequest,response);
     }
 
-
-
     @PostMapping("/logout")
     public void logout(@RequestHeader(value = "Authorization") String sessionId) {
         personService.logout(sessionId);
     }
+
+    @GetMapping("/{personId}")
+    public RegisterResponse getById(@PathVariable String personId){
+        return personService.findById(personId);
+
+    }
+    /*@GetMapping("/users/{id}")
+    public User getById(@PathVariable("id") String id) {
+        return userRepository.findById(id).orElse(null);
+    }*/
 
     @PostMapping("/update")
     public UpdateResponse updateAccount(@RequestBody UpdateRequest updateRequest,
