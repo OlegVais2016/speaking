@@ -42,7 +42,7 @@ public class PersonController {
         personService.logout(sessionId);
     }
 
-    @GetMapping("/{personId}")
+    @GetMapping("/getById/{personId}")
     public RegisterResponse getById(@PathVariable String personId){
         return personService.findById(personId);
 

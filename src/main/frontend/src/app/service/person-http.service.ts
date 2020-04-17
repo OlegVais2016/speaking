@@ -30,6 +30,7 @@ debugger;
   private personsUrlDelete = 'api/persons/delete';
   private personsUrlLogin = 'api/persons/login';
   private personUrlLogout = 'api/persons/logout';
+  private personUrlGetById = 'api/persons/getById';
 
   /*httpOptions = {
     headers: new HttpHeaders(
@@ -58,6 +59,11 @@ debugger;
     const personId = typeof person === 'string' ? person : person.personId;
     const url = `${this.personsUrlDelete}/${personId}`;
     return this.httpClient.delete<Person>(url)
+  }
+  getPerson(person:Person | string):Observable<Person>{
+    const personId = typeof person === 'string' ? person : person.personId;
+    const url = `${this.personUrlGetById}/${personId}`;
+    return this.httpClient.get<Person>(url);
   }
 }
 

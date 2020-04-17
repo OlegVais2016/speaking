@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import Person from "../../../model/person";
+import person from "../../../model/person";
+import {PersonHttpService} from "../../../service/person-http.service";
+import {ActivatedRoute, Route} from "@angular/router";
 
 @Component({
   selector: 'app-person-detail',
@@ -7,9 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonDetailComponent implements OnInit {
 
-  constructor() { }
+  public persons: Person[] = [];
+  person: Person;
+  constructor(private personHttpService: PersonHttpService,
+              private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit(): void{
+    this.getPerson();
   }
-
+  getPerson():void{
+    debugger;
+    const id = +this.route.snapshot.paramMap.get('personId');
+    const personId = id.toString();
+    this.personHttpService.getPerson(personId)
+      .subscribe(person => this.person =person);
+  }
 }
+
