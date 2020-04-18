@@ -111,6 +111,20 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public RegisterResponse getByName(String firstName) {
+        Person person = personRepository.findByName(firstName);
+
+        return RegisterResponse.builder()
+                .personId(person.getPersonId())
+                .email(person.getEmail())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .number(person.getNumber())
+                .age(person.getAge())
+                .build();
+    }
+
+    @Override
     public UpdateResponse updateAccount(UpdateRequest updateRequest, Person person) {
 
         person.setFirstName(updateRequest.getFirstName());

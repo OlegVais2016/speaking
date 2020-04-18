@@ -18,6 +18,7 @@ public interface PersonService {
     LoginResponse login(LoginRequest loginRequest, HttpServletResponse response);
     void logout(String sessionId);
     RegisterResponse findById(String personId);
+    RegisterResponse getByName(String firstName);
     UpdateResponse updateAccount(UpdateRequest updateRequest, Person person);
     List<UpdateResponse> getPersonsList();
     void deleteById(String personId);

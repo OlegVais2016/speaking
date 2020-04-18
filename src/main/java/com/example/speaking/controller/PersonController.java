@@ -47,10 +47,11 @@ public class PersonController {
         return personService.findById(personId);
 
     }
-    /*@GetMapping("/users/{id}")
-    public User getById(@PathVariable("id") String id) {
-        return userRepository.findById(id).orElse(null);
-    }*/
+    @GetMapping("/getByName")
+    public RegisterResponse getByName(@RequestParam String firstName){
+        return personService.getByName(firstName);
+
+    }
 
     @PostMapping("/update")
     public UpdateResponse updateAccount(@RequestBody UpdateRequest updateRequest,

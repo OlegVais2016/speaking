@@ -14,6 +14,7 @@ import { LoginComponent } from './content/persons/login/login.component';
 import { LogoutComponent } from './content/persons/logout/logout.component';
 import {PersonHttpService} from "./service/person-http.service";
 import { PersonDetailComponent } from './content/persons/person-detail/person-detail.component';
+import { PersonSearchComponent } from './content/persons/person-search/person-search.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { PersonDetailComponent } from './content/persons/person-detail/person-de
     AddComponent,
     LoginComponent,
     LogoutComponent,
-    PersonDetailComponent
+    PersonDetailComponent,
+    PersonSearchComponent
   ],
   imports: [
     BrowserModule,

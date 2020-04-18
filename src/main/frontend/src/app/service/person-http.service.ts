@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import Person from "../model/person";
+import {catchError, tap} from "rxjs/operators";
 
 
 @Injectable({
@@ -31,7 +32,7 @@ debugger;
   private personsUrlLogin = 'api/persons/login';
   private personUrlLogout = 'api/persons/logout';
   private personUrlGetById = 'api/persons/getById';
-
+  private personUrlGetByName = 'api/persons/getByName';
   /*httpOptions = {
     headers: new HttpHeaders(
       { 'Content-Type': 'application/json','Authorization':'token' })
@@ -65,6 +66,22 @@ debugger;
     const url = `${this.personUrlGetById}/${personId}`;
     return this.httpClient.get<Person>(url);
   }
+  searchPersons(term: string): Observable<Person[]>{
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.httpClient
+      .get<Person[]>(`${this.personUrlGetByName}/?firstName=${term}`);
+
+  }
 }
 
+/*
 
+return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+  tap(_ => this.log(`found heroes matching "${term}"`)),
+  catchError(this.handleError<Hero[]>('searchHeroes', []))
+);
+}
+*/

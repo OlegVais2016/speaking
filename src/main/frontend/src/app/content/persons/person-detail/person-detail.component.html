@@ -3,10 +3,10 @@
 </p>
 <div *ngIf = "person ">
   <h2>{{person.lastName| uppercase}} Details</h2>
-  <div><span>personId: </span>{{person.personId}}</div>
+  <div><span>id: </span>{{person.personId}}</div>
   <div>
     <label>name:
-      <input [(ngModel)]="person.lastName" placeholder="name"/>
+      <input [(ngModel)]="person.lastName" placeholder="firstName"/>
     </label>
   </div>
  <!-- <button (click)="goBack()">go back</button>-->
@@ -14,7 +14,7 @@
           (click)="getPerson()">get</button>
 </div>
 
-<div>
+<div >
   <h2> Details</h2>
 </div>
 
