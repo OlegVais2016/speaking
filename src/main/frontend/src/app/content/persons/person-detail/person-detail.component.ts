@@ -11,7 +11,6 @@ import {ActivatedRoute, Route} from "@angular/router";
 })
 export class PersonDetailComponent implements OnInit {
 
- // public persons: Person[] = [];
   @Input()person: Person;
   constructor(private personHttpService: PersonHttpService,
               private route: ActivatedRoute) { }
@@ -21,10 +20,10 @@ export class PersonDetailComponent implements OnInit {
   }
   getPerson():void{
     debugger;
-    const id = +this.route.snapshot.paramMap.get('personId');
+    const id = this.route.snapshot.paramMap.get('personId');
     const personId = id.toString();
     this.personHttpService.getPerson(personId)
-      .subscribe(person => this.person =person);
+      .subscribe(person => this.person = person);
   }
 }
 
