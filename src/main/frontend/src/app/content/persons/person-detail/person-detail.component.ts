@@ -11,8 +11,8 @@ import {ActivatedRoute, Route} from "@angular/router";
 })
 export class PersonDetailComponent implements OnInit {
 
-  public persons: Person[] = [];
-  person: Person;
+ // public persons: Person[] = [];
+  @Input()person: Person;
   constructor(private personHttpService: PersonHttpService,
               private route: ActivatedRoute) { }
 

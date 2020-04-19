@@ -1,21 +1,19 @@
 <p>
   person-detail works!
 </p>
-<div *ngIf = "person ">
-  <h2>{{person.lastName| uppercase}} Details</h2>
-  <div><span>id: </span>{{person.personId}}</div>
+<div *ngIf = "person">
+  <h2>{{person.firstName| uppercase}} Details</h2>
+  <div><span>personId: </span>{{person.personId}}</div>
   <div>
     <label>name:
-      <input [(ngModel)]="person.lastName" placeholder="firstName"/>
+      <input [(ngModel)]="person.firstName" placeholder="firstName"/>
     </label>
   </div>
  <!-- <button (click)="goBack()">go back</button>-->
-  <button class="get" title="get person"
-          (click)="getPerson()">get</button>
+ <!-- <button class="get" title="get person"
+          (click)="getPerson()">get</button>-->
 </div>
 
-<div >
-  <h2> Details</h2>
-</div>
+
 
 

@@ -68,20 +68,29 @@ debugger;
   }
   searchPersons(term: string): Observable<Person[]>{
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty person array.
       return of([]);
     }
     return this.httpClient
-      .get<Person[]>(`${this.personUrlGetByName}/?firstName=${term}`);
+      .get<Person[]>(`${this.personUrlGetByName}/?firstName=${term}`).pipe(
 
+        catchError(this.handleError<Person[]>('searchPersons', []))
+      );
+
+  }
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      // this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
 
-/*
 
-return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-  tap(_ => this.log(`found heroes matching "${term}"`)),
-  catchError(this.handleError<Hero[]>('searchHeroes', []))
-);
-}
-*/
