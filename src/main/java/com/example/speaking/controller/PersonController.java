@@ -48,7 +48,7 @@ public class PersonController {
 
     }
     @GetMapping("/getByName")
-    public RegisterResponse getByName(@RequestParam String firstName){
+    public List<RegisterResponse> getByName(@RequestParam String firstName){
         return personService.getByName(firstName);
 
     }

@@ -111,17 +111,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public RegisterResponse getByName(String firstName) {
-        Person person = personRepository.findByName(firstName);
+    public List<RegisterResponse> getByName(String firstName) {
 
-        return RegisterResponse.builder()
-                .personId(person.getPersonId())
-                .email(person.getEmail())
-                .firstName(person.getFirstName())
-                .lastName(person.getLastName())
-                .number(person.getNumber())
-                .age(person.getAge())
-                .build();
+        List<Person> persons = personRepository.findByName(firstName);
+
+        return persons.stream()
+                .map(this::transform2)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -158,6 +154,16 @@ public class PersonServiceImpl implements PersonService {
 
     private UpdateResponse transform(Person person){
         return UpdateResponse.builder()
+                .personId(person.getPersonId())
+                .email(person.getEmail())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .age(person.getAge())
+                .number(person.getNumber())
+                .build();
+    }
+    private RegisterResponse transform2(Person person){
+        return RegisterResponse.builder()
                 .personId(person.getPersonId())
                 .email(person.getEmail())
                 .firstName(person.getFirstName())
