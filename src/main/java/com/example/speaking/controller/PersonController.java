@@ -32,7 +32,7 @@ public class PersonController {
     }
 
     @PostMapping("/login")
-    public LoginResponse login (@RequestBody LoginRequest loginRequest,
+    public RegisterResponse login (@RequestBody LoginRequest loginRequest,
                                 HttpServletResponse response){
         return personService.login(loginRequest,response);
     }

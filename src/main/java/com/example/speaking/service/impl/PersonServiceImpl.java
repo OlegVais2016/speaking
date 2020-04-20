@@ -60,7 +60,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public LoginResponse login(LoginRequest loginRequest, HttpServletResponse response) {
+    public RegisterResponse login(LoginRequest loginRequest, HttpServletResponse response) {
 
         Person person = personRepository.findByEmailAndPassword
                 (loginRequest.getEmail(), loginRequest.getPassword());
@@ -77,8 +77,15 @@ public class PersonServiceImpl implements PersonService {
                 .build());
         log.debug("User with name = {} logged in", person.getFirstName());
         response.setHeader("Authorization", personSession.getSessionId());
-        return LoginResponse.builder()
-                .token(personSession.getSessionId())
+        log.info( "token: " + personSession.getSessionId());
+
+        return RegisterResponse.builder()
+                .personId(person.getPersonId())
+                .email(person.getEmail())
+                .firstName(person.getFirstName())
+                .lastName(person.getLastName())
+                .number(person.getNumber())
+                .age(person.getAge())
                 .build();
     }
 

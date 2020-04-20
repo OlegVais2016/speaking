@@ -15,7 +15,7 @@ import java.util.List;
 public interface PersonService {
 
     RegisterResponse savePerson(RegisterRequest registerRequest);
-    LoginResponse login(LoginRequest loginRequest, HttpServletResponse response);
+    RegisterResponse login(LoginRequest loginRequest, HttpServletResponse response);
     void logout(String sessionId);
     RegisterResponse findById(String personId);
     List<RegisterResponse> getByName(String firstName);
