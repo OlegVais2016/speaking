@@ -1,9 +1,11 @@
-<p>
-  person-detail works!
-</p>
+
 <div *ngIf = "person">
   <h2>{{person.firstName| uppercase}} Details</h2>
   <div><span>personId: </span>{{person.personId}}</div>
+  <div><span>email: </span>{{person.email}}</div>
+  <div><span>last Name: </span>{{person.lastName}}</div>
+  <div><span>telephone number: </span>{{person.number}}</div>
+  <div><span>age: </span>{{person.age}}</div>
   <div>
     <label>name:
       <input [(ngModel)]="person.firstName" placeholder="firstName"/>

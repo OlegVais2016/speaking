@@ -19,7 +19,6 @@ export class PersonDetailComponent implements OnInit {
     this.getPerson();
   }
   getPerson():void{
-    debugger;
     const id = this.route.snapshot.paramMap.get('personId');
     const personId = id.toString();
     this.personHttpService.getPerson(personId)
