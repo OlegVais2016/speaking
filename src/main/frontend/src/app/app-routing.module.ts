@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'persons/all', component: PersonsComponent, canActivate: [AuthGuardGuard]},
   {path: 'persons/logout', component: LogoutComponent, canActivate: [AuthGuardGuard]},
   {path: 'detail/:personId', component: PersonDetailComponent},
-  {path: 'persons/page', component: PersonPageComponent}
+  {path: 'persons/page', component: PersonPageComponent,canActivate: [AuthGuardGuard]}
 
 
 ];

@@ -1,6 +1,7 @@
 <p>
-  person-page works!
+  person-page works! You have logged in!
 </p>
+<h1>Hi {{person.firstName}}!</h1>
 <div *ngIf = "person">
   <h2>{{person.firstName| uppercase}} Details</h2>
   <div><span>personId: </span>{{person.personId}}</div>

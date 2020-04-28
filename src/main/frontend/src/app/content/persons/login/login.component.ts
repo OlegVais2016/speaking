@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {Observable, Subject} from "rxjs";
 import Person from "../../../model/person";
 import {debounceTime, distinctUntilChanged, switchMap} from "rxjs/operators";
+import person from "../../../model/person";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
       .login(this.person.email, this.person.password)
       .subscribe(response => {
         localStorage.setItem("Authorization", response.headers.get("Authorization"));
-        this.route.navigate(['/persons/page']);
+        this.route.navigate(['/persons/all']);
        console.log(response.headers.get("Authorization"));
       })
 

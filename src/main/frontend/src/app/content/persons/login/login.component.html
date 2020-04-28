@@ -1,14 +1,30 @@
 <div class="container">
 <div class="form-group">
   <label for="username">Email</label>
-  <input type="text" class="form-control" id="username" placeholder="Email" [(ngModel)]="person.email">
-  <small id="usernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+  <input type="text" class="form-control" id="username"
+         placeholder="Email" [(ngModel)]="person.email">
+  <small id="usernameHelp" class="form-text text-muted">
+    We'll never share your username with anyone else.</small>
 </div>
 <div class="form-group">
   <label for="password">Password</label>
-  <input type="text" class="form-control" id="password" placeholder="Password" [(ngModel)]="person.password">
+  <input type="text" class="form-control" id="password"
+         placeholder="Password" [(ngModel)]="person.password">
 </div>
 <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+
+  <div>
+    <!--<input #searchBox id="search-box" (input)="search(searchBox.value)" />-->
+    <button (click)="search(person.email)"></button>
+  </div>
+  <ul class="search-result">
+    <li *ngFor="let person of persons$ | async" >
+      <a routerLink="/detail/{{person.personId}}">
+        {{person.firstName}}
+      </a>
+    </li>
+  </ul>
+
 
 </div>
 
